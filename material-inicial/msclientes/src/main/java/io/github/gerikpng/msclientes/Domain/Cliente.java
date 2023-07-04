@@ -1,2 +1,29 @@
-package io.github.gerikpng.msclientes.Domain;public class Cliente {
+package io.github.gerikpng.msclientes.Domain;
+
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+@Data
+@NoArgsConstructor
+@Getter
+@Setter
+public class Cliente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String cpf;
+    private String nome;
+    private Integer idade;
+
+    public Cliente(String cpf, String nome, Integer idade) {
+        this.cpf = cpf;
+        this.idade = idade;
+        this.nome = nome;
+    }
 }
