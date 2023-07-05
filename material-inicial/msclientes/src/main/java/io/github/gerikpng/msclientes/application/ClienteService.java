@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor //RESUME A CRIAÇÃO DE UM CONSTRUTOR PARA O repository APENAS NESSE COMANDO
 public class ClienteService {
 
+
     private final ClienteRepository repository;
 
     @Transactional
@@ -20,6 +21,7 @@ public class ClienteService {
     }
 
     public Optional<Cliente> getByCPF(String cpf){
+
         return repository.findByCpf(cpf);
     }
 }

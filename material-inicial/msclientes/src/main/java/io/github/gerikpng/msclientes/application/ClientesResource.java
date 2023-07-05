@@ -1,13 +1,22 @@
 package io.github.gerikpng.msclientes.application;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.github.gerikpng.msclientes.Domain.Cliente;
+import io.github.gerikpng.msclientes.application.representation.ClienteSaveRequest;
+import io.github.gerikpng.msclientes.infra.repository.ClienteRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/clientes")
+@RequiredArgsConstructor
 public class ClientesResource {
+
+
+    private final ClienteService service;
 
     @GetMapping
     public String status(){
@@ -15,7 +24,10 @@ public class ClientesResource {
     }
 
     @PostMapping
-    public String salvar(){
-    return "";
+    public ResponseEntity salvar(@RequestBody ClienteSaveRequest request){
+        Cliente clienteModel = request.toModel();
+        service.save(clienteModel);
+        URI headerLocation = ServletUriComponentsBuilder // CONSTRUIR URL DINAMICA
+                .fromCurrentRequest()
     }
 }
