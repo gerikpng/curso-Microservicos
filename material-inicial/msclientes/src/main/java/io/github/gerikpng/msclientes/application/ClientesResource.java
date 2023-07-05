@@ -28,6 +28,18 @@ public class ClientesResource {
         Cliente clienteModel = request.toModel();
         service.save(clienteModel);
         URI headerLocation = ServletUriComponentsBuilder // CONSTRUIR URL DINAMICA
-                .fromCurrentRequest()
+                .fromCurrentRequest().query("cpf={cpf}")
+                .buildAndExpand(clienteModel.getCpf())
+                .toUri();
+                return ResponseEntity.created(headerLocation).build();
+    }
+
+    @GetMapping(params = "cpf")
+    public ResponseEntity dados(@RequestParam("cpf") String cpf){
+        var clienteModel = service.getByCpf(cpf);
+        if(clienteModel.isEmpty()){
+            return ResponseEntity.NotFound().build();
+        }
+        return ResponseEntity.ok(clienteModel);
     }
 }
