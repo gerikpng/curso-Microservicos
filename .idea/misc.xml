@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/material-inicial/msclientes/pom.xml" />
+        <option value="$PROJECT_DIR$/material-inicial/eurekaserver/pom.xml" />
+        <option value="$PROJECT_DIR$/material-inicial/mscloudgateway/pom.xml" />
+        <option value="$PROJECT_DIR$/material-inicial/curso-microservices-springcloud-master/projeto-cursoms/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/material-inicial/eurekaserver/pom.xml" />
+        <option value="$PROJECT_DIR$/material-inicial/msclientes/pom.xml" />
+        <option value="$PROJECT_DIR$/material-inicial/mscloudgateway/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
