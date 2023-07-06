@@ -4,6 +4,7 @@ import io.github.gerikpng.msclientes.Domain.Cliente;
 import io.github.gerikpng.msclientes.application.representation.ClienteSaveRequest;
 import io.github.gerikpng.msclientes.infra.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -13,6 +14,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/clientes")
 @RequiredArgsConstructor
+@Slf4j
 public class ClientesResource {
 
 
@@ -20,11 +22,13 @@ public class ClientesResource {
 
     @GetMapping
     public String status(){
+        log.info("obtendo status");
         return "ok";
     }
 
     @PostMapping
     public ResponseEntity salvar(@RequestBody ClienteSaveRequest request){
+        log.info("salvando");
         Cliente clienteModel = request.toModel();
         service.save(clienteModel);
         URI headerLocation = ServletUriComponentsBuilder // CONSTRUIR URL DINAMICA
