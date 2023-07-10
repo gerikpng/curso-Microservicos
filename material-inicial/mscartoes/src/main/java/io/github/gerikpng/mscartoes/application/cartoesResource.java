@@ -31,7 +31,6 @@ public class cartoesResource {
         cartaoService.save(cartaoModel);
     return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
     @GetMapping(params = "cpf")
     public ResponseEntity<List<CartoesPorClienteResponse>> getCartoesByCliente(@RequestParam("cpf") String cpf){
         List<ClienteCartao> cartaoModel = clientecartaoService.listCartoesByCpf(cpf);
@@ -41,13 +40,9 @@ public class cartoesResource {
         //}
         return ResponseEntity.ok(resultList);
     }
-
     @GetMapping(params="renda")
     public ResponseEntity<List<Cartao>> getCartoesRendaAte(@RequestParam("renda") Long renda){
         List<Cartao> lista = cartaoService.getCartoesRendaMenorIgual(renda);
         return ResponseEntity.ok(lista);
     }
-
-
-
 }

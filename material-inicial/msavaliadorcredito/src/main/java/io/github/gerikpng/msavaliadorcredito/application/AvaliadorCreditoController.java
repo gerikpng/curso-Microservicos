@@ -1,12 +1,14 @@
 package io.github.gerikpng.msavaliadorcredito.application;
 
+import io.github.gerikpng.msavaliadorcredito.application.ex.DadosClienteNotFoundException;
+import io.github.gerikpng.msavaliadorcredito.application.ex.ErroComunicacaoMicroservicesException;
+import io.github.gerikpng.msavaliadorcredito.domain.model.DadosAvaliacao;
+import io.github.gerikpng.msavaliadorcredito.domain.model.RetornoAvaliacaoCliente;
 import io.github.gerikpng.msavaliadorcredito.domain.model.SituacaoCliente;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -22,12 +24,29 @@ public class AvaliadorCreditoController {
     }
 
     @GetMapping(params = "cpf")
-    public ResponseEntity<SituacaoCliente> consultaSituacao(@RequestParam("cpf") String cpf){
-        SituacaoCliente situacaocli = avaliadorCreditoService.obterSituacaoCliente(cpf);
-        if(situacaocli == null){
+    public ResponseEntity consultaSituacao(@RequestParam("cpf") String cpf){
+
+        try {
+            SituacaoCliente situacaocli = avaliadorCreditoService.obterSituacaoCliente(cpf);
+            return ResponseEntity.ok(situacaocli);
+        } catch (DadosClienteNotFoundException e) {
             return ResponseEntity.notFound().build();
+        } catch (ErroComunicacaoMicroservicesException e) {
+            return ResponseEntity.status(HttpStatus.resolve(e.getStatus())).body(e.getMessage());
         }
-        return ResponseEntity.ok(situacaocli);
+
+    }
+    @PostMapping
+    public ResponseEntity realizarAvaliacao(@RequestBody DadosAvaliacao dados){
+        try {
+            RetornoAvaliacaoCliente retorno = avaliadorCreditoService.realizarAvaliacao(dados.getCpf(),dados.getRenda());
+            return ResponseEntity.ok(retorno);
+        } catch (DadosClienteNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (ErroComunicacaoMicroservicesException e) {
+            return ResponseEntity.status(HttpStatus.resolve(e.getStatus())).body(e.getMessage());
+        }
+
     }
 
 }

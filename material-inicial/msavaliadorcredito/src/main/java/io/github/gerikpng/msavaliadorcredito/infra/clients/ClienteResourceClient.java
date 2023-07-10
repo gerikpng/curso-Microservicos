@@ -1,5 +1,6 @@
 package io.github.gerikpng.msavaliadorcredito.infra.clients;
 
+import io.github.gerikpng.msavaliadorcredito.domain.model.DadosCliente;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface ClienteResourceClient {
 
     @GetMapping(params = "cpf")
-    ResponseEntity dados(@RequestParam("cpf") String cpf);
+    ResponseEntity<DadosCliente> dados(@RequestParam("cpf") String cpf);
 
 }

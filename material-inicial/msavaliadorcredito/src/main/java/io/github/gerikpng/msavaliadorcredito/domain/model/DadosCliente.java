@@ -8,5 +8,6 @@ import java.util.List;
 public class DadosCliente {
     private long id;
     private String nome;
+    private Integer idade;
     //private List<CartoesCliente> cartoes;
 }
